@@ -29,10 +29,11 @@ class ListTest extends TestCase
         $response = $this->post('/list/create',array(
             'task'=>$data->task,
             'description'=>$data->description,
-            'status'=>$data->isComplete
+            'isComplete'=>$data->isComplete
         ));
 
-        $response->assertOK();
+        //$response->assertOK();
+        $response->assertRedirect('/lists');
         $this->assertCount(1,Lists::all());
     }
 }

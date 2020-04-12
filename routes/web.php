@@ -22,3 +22,4 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/list/create','ListsController@store')->name('lists.submit');
+Route::get('/lists','ListsController@index')->name('lists.all');

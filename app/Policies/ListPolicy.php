@@ -41,7 +41,7 @@ class ListPolicy
      */
     public function create(User $user)
     {
-        return $user->role() === array('superadmin','user1','user2');
+        return in_array($user->role(),['superadmin'.'user1','user2']);
     }
 
     /**
