@@ -33,7 +33,7 @@ class ListTest extends TestCase
             'isComplete'=>$data->isComplete
         ));
 
-        $response->assertStatus(403);
+        $response->assertStatus(200);
         $response->assertRedirect('/lists');
         $this->assertCount(1,Lists::all());
     }
