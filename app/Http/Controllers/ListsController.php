@@ -35,7 +35,7 @@ class ListsController extends Controller
      */
     public function store(Request $request)
     {
-       //$this->authorize('create',Lists::class);
+       $this->authorize('create',Lists::class);
         Lists::create(array(
             'task'=>$request->task,
             'description'=>$request->description,
