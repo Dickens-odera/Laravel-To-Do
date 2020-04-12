@@ -96,7 +96,8 @@
 				</div>
 				<div class="d-flex justify-content-center form_container">
                     <form action="{{ route('login') }}" method="POST">
-                        {{ csrf_field() }}
+						{{ csrf_field() }}
+						<h4 class="text-center text-upprcase mb-1" style="color:#fff; background:#000; padding:2%;border-radius:2px">{{ config('app.name')}}</h4>
 						<div class="input-group mb-3">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-user"></i></span>

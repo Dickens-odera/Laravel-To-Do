@@ -33,10 +33,10 @@ class ListsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Lists $lists)
     {
-       $this->authorize('create',Lists::class);
-        Lists::create(array(
+       $this->authorize('create',$lists);
+        $lists->create(array(
             'task'=>$request->task,
             'description'=>$request->description,
             'isComplete'=>false
