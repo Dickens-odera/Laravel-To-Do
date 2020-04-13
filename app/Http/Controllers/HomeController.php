@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Lists;
 use App\User;
+use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -28,8 +29,7 @@ class HomeController extends Controller
      */
     public function index(User $user,Lists $lists)
     {
-        //dd($user->role);
-        //$this->authorize('view', $lists);
+            $this->authorize('view-lists', $lists);
             $user = Auth::user();
             $lists = $lists->where('user_id','=',$user->id)->paginate(5);
             return view('home', compact('lists'));
@@ -44,7 +44,7 @@ class HomeController extends Controller
      */
     public function store(Request $request, Lists $lists)
     {
-       //$this->authorize('create', $lists);
+       $this->authorize('create-lists', $lists);
        $validator = Validator::make($request->all(), array(
             'task'=>'required',
             'description'=>'required'
@@ -69,5 +69,16 @@ class HomeController extends Controller
             $request->session()->flash('error','Failed to add a new list, try again');
             return redirect()->back()->withInput($request->only('task','description'));
         }
+    }
+    public function update(Request $request, $id, Lists $lists)
+    {
+        $this->authorize('update-lists', $lists);
+        $lists = $lists->findOrFail($id);
+        $lists->update(array(
+            'task'=>$request->task,
+            'description'=>$request->description,
+            'isComplete'=>false,
+        ));
+        return redirect()->back();
     }
 }

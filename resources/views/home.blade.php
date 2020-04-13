@@ -45,11 +45,11 @@
                                             {{-- @can('view', Lists::class) --}}
                                             <td class="btn-group btn-group-sm" style="width:100%">
                                                 @if(Gate::allows('view-lists'))
-                                                    <a href="" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> View</a>
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-whatever="@getbootstrap"> View</button>
                                                 @endif
                                                 {{-- <a href="" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a> --}}
                                                 @if(Gate::allows('update-lists', $value))
-                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-whatever="@getbootstrap">Edit</button>
                                                 @endif
                                                 @if(Gate::allows('delete-lists', $value))
                                                     <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
@@ -100,6 +100,38 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="updateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">New List</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST" enctype="multipart/form-data" action="{{ route('lists.update',['id'=>$value->id]) }}">
+              {{ csrf_field() }}
+            <div class="form-group">
+              <label for="recipient-name" class="col-form-label">List Name:</label>
+              <input type="text" class="form-control" id="recipient-name" name="task" value="{{ $value->task }}">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label">Description:</label>
+              <textarea class="form-control" id="message-text" name="description"></textarea>
+            </div>
+            <div class="form-group"></div>
+             @if(Gate::allows('update-lists', $value))
+                <button type="submit" class="btn btn-primary">Submit</button>
+             @endif 
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
     </div>
 </div>
 @endsection
