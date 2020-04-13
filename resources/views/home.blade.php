@@ -104,26 +104,32 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">New List</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Update List</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
         <div class="modal-body">
-          <form method="POST" enctype="multipart/form-data" action="{{ route('lists.update',['id'=>$value->id]) }}">
+          <form method="POST" enctype="multipart/form-data" action="">
               {{ csrf_field() }}
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">List Name:</label>
-              <input type="text" class="form-control" id="recipient-name" name="task" value="{{ $value->task }}">
-            </div>
-            <div class="form-group">
-              <label for="message-text" class="col-form-label">Description:</label>
-              <textarea class="form-control" id="message-text" name="description"></textarea>
-            </div>
-            <div class="form-group"></div>
-             @if(Gate::allows('update-lists', $value))
-                <button type="submit" class="btn btn-primary">Submit</button>
-             @endif 
+              {{ $key = Null}}
+              {{-- @if(count($lists) > 0)
+                  @foreach($lists as $key=>$value)
+                    $key = $value
+                  @endforeach
+              @endif --}}
+                    <div class="form-group">
+                      <label for="recipient-name" class="col-form-label">List Name:</label>
+                      <input type="text" class="form-control" id="recipient-name" name="task" value="">
+                    </div>
+                    <div class="form-group">
+                      <label for="message-text" class="col-form-label">Description:</label>
+                      <textarea class="form-control" id="message-text" name="description"value=""></textarea>
+                    </div>
+                    <div class="form-group"></div>
+                    {{-- @if(Gate::allows('update-lists', $value))
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    @endif  --}}
           </form>
         </div>
         <div class="modal-footer">
