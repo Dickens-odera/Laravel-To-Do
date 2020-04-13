@@ -14,7 +14,19 @@
 ![alt](/public/images/todoapp.png)
 ---
 ### API
-###### GET (All lists)
+###### GET (Read All list items)
 ![alt](/public/images/api-all.png)
-###### GET (single list)
+---
+###### GET (Read a single list ietm)
 ![alt](/public/images/api-lists-single.png)
+---
+###### POST (Create a new list item)
+![alt](/public/images/postapi.png)
+###### PUT (Update a single list item)
+![alt](/public/images/putapi.png)
+
+---
+###### DELETE (Delete a single list item)
+![alt](/public/images/deleteapi.png)
+
+--
