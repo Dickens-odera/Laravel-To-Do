@@ -15,11 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login-ui');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/list/create','ListsController@store')->name('lists.submit');
-Route::get('/lists','ListsController@index')->name('lists.all');
+Route::post('/list/create','HomeController@store')->name('lists.submit');
+Route::get('/lists','HomeController@index')->name('lists.all');
+Route::get('/lists/form','HomeController@create')->name('lists.form');

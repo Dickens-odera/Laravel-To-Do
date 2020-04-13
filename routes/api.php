@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::post('/lists/create','Api\ListsApiController@store')->name('api.lists.submit');
+Route::get('/lists','Api\ListsApiController@index')->name('lists.index');
+Route::get('/lists/{id}','Api\ListsApiController@show')->name('lists.api.show');
+Route::put('/lists/{id}','Api\ListsApiController@store')->name('lists.api.update');
+Route::delete('/lists/{id}','Api\ListsApiController@destroy')->name('lists.api.delete');
