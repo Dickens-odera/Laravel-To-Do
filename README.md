@@ -1,8 +1,8 @@
 ### Laravel To-Do APP with API
 ###### Users
-1. superadmin
-2. user1
-3. user2
+1. superadmin (CRUD)
+2. user1 (CR)
+3. user2 (CRU)
 #### operations
 1. Create
 2. Read
