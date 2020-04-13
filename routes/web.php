@@ -25,3 +25,4 @@ Route::post('/list/create','HomeController@store')->name('lists.submit');
 Route::get('/lists','HomeController@index')->name('lists.all');
 Route::get('/lists/form','HomeController@create')->name('lists.form');
 Route::put('/lists/{id}','HomeController@update')->name('lists.update');
+Route::delete('lists/{id}','HomeController@destroy')->name('list.delete');

@@ -23,8 +23,10 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application dashboard and the lists
      *
+     * @param \App\User $user
+     * @param \App\Lists $lists
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index(User $user,Lists $lists)
@@ -40,6 +42,7 @@ class HomeController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     * @param \App\Lists $lists
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request, Lists $lists)
@@ -70,6 +73,14 @@ class HomeController extends Controller
             return redirect()->back()->withInput($request->only('task','description'));
         }
     }
+    /**
+     * Update a single list
+     * 
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
+     * @param \App\Lists $lists
+     * @return \Illuminate\Http\Response
+     */
     public function update(Request $request, $id, Lists $lists)
     {
         $this->authorize('update-lists', $lists);
@@ -79,6 +90,20 @@ class HomeController extends Controller
             'description'=>$request->description,
             'isComplete'=>false,
         ));
+        return redirect()->back();
+    }
+    /**
+     * Delete a single list
+     * 
+     * @param \App\Lists $list
+     * @param int $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Lists $list, $id)
+    {
+        $this->authorize('delete-lists', $list);
+        $list = $list->find($id);
+        $list->delete();
         return redirect()->back();
     }
 }

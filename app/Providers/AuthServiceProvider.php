@@ -30,7 +30,6 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('view-lists', function($user)
         {
             $role = $user->role();
-            //dd($role);
             return $role == in_array($role,['superadmin','user1','user2']) ?
                  Response::allow(): Response::deny('Anauthorized');
         });
