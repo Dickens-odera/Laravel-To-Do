@@ -6,6 +6,7 @@ use App\Lists;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -29,9 +30,10 @@ class HomeController extends Controller
     {
         //dd($user->role);
         //$this->authorize('view', $lists);
-        $user = Auth::user();
-        $lists = $lists->paginate(5);
-        return view('home', compact('lists'));
+            $user = Auth::user();
+            $lists = $lists->where('user_id','=',$user->id)->paginate(5);
+            return view('home', compact('lists'));
+
     }
 
     /**
@@ -42,7 +44,7 @@ class HomeController extends Controller
      */
     public function store(Request $request, Lists $lists)
     {
-       //$this->authorize('create',$lists);
+       //$this->authorize('create', $lists);
        $validator = Validator::make($request->all(), array(
             'task'=>'required',
             'description'=>'required'

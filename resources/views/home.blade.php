@@ -7,9 +7,10 @@
             <div class="card">
                 <div class="card-header">
                     Dashboard
-                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"> Add New</button>
+                    @if(Gate::allows('create-lists'))
+                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"> Add New</button>
+                    @endif
                 </div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -18,6 +19,7 @@
                     @endif
                         <h6 class="text-center text-uppercase">My Tasks</h6>
                        <div class="table-responsive">
+                           @if(Gate::allows('view-lists'))
                            <table class="table table-bordered">
                                <thead style="color:#fff; background:#000">
                                     <tr>
@@ -42,10 +44,16 @@
                                             @endif
                                             {{-- @can('view', Lists::class) --}}
                                             <td class="btn-group btn-group-sm" style="width:100%">
-                                                <a href="" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> View</a>
+                                                @if(Gate::allows('view-lists'))
+                                                    <a href="" class="btn btn-success btn-sm"><i class="fa fa-eye"></i> View</a>
+                                                @endif
                                                 {{-- <a href="" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a> --}}
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
-                                                <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                                @if(Gate::allows('update-lists', $value))
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap">Edit</button>
+                                                @endif
+                                                @if(Gate::allows('delete-lists', $value))
+                                                    <a href="" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                                                @endif
                                                 <a href="" class="btn btn-warning btn-sm"><i class="fa fa-wrench"></i> Mark as complete</a>
                                             </td>
                                             {{-- @endcan --}}
@@ -55,6 +63,7 @@
                             @endif
                             {{ $lists->links()}}
                            </table>
+                           @endif
                        </div>
                 </div>
             </div>

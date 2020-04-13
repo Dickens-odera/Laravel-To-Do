@@ -30,9 +30,8 @@ class ListPolicy
      */
     public function view(User $user, Lists $lists)
     {
-        $role = $user->role;
-        //dd($role);
-        return in_array($user->role,['superadmin']) && $user->id === $lists->id;
+        $role = $user->role();
+        return $role = in_array($role,['superadmin','user1','user2']) && $user->id == $lists->user_id;
     }
 
     /**
@@ -43,7 +42,7 @@ class ListPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->role(),['superadmin'.'user1','user2']);
+        return $user->role() == in_array($user->role,['superadmin','user1','user2']);
     }
 
     /**
@@ -55,10 +54,8 @@ class ListPolicy
      */
     public function update(User $user, Lists $lists)
     {
-        // $role = $user->role;
-        // return $role == 'superadmin' && $lists->id === $user->id;
         $role = $user->role();
-        return $role === in_array((array)$user->role,['superaddmin','user2']) && $user->id === $lists->id;
+        return $role == in_array($role,['superaddmin','user2']) && $user->id == $lists->user_id;
     }
 
     /**
@@ -71,7 +68,7 @@ class ListPolicy
     public function delete(User $user, Lists $lists)
     {
         $role = $user->role();
-        return $role === in_array((array)$role,['superadmin','user2']) && $user->id === $lists->id;
+        return $role == in_array($role,['superadmin','user2']) && $user->id === $lists->user_id;
     }
 
     /**
