@@ -43,7 +43,7 @@ class ListsApiTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $data = factory(Lists::class)->make();
-        $response = $this->get('/api/lists/{id}',[
+        $response = $this->get('/api/v1/lists/{id}',[
             'id'=>$data->id,
         ]);
 
@@ -59,7 +59,7 @@ class ListsApiTest extends TestCase
         $data = factory(Lists::class)->make();
         $list = $data->fresh()->id;
         $list = Lists::where('id','=',$data->id)->first();
-        $response = $this->delete('/api/lists/{id}',['id'=>$data->id]);
+        $response = $this->delete('/api/v1/lists/{id}',['id'=>$data->id]);
         $response->assertStatus(200);
         $this->assertCount(0, Lists::where('id','=',$data->id));
     }
