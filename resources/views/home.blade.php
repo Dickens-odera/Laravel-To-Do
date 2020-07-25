@@ -10,6 +10,7 @@
                     @if(Gate::allows('create-lists'))
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"> Add New</button>
                     @endif
+                    <a href="" class="btn btn-sm btn-primary" style="float: right"><i class="fa fa-arrow-down"></i> PDF</a>
                 </div>
                 <div class="card-body">
                     @if (session('status'))
@@ -48,7 +49,7 @@
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-whatever="@getbootstrap"> View</button>
                                                 @endif
                                                 {{-- <a href="" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> Edit</a> --}}
-                                                @if(Gate::allows('update-lists', $value))
+                                                @if(Gate::allows('update-lists',$value))
                                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateModal" data-whatever="@getbootstrap">Edit</button>
                                                 @endif
                                                 @if(Gate::allows('delete-lists', $value))
